@@ -1,5 +1,6 @@
 import React, { HTMLAttributes } from 'react'
 import styled from "styled-components";
+import { DimensionStyledCss, DimensionStyledTypes, MarginStyledCss, MarginStyledTypes, PaddingStyledCss, PaddingStyledTypes } from '../../types/StyledTypes';
 
 export function Flex(props: FlexProps) {
   return (
@@ -12,7 +13,7 @@ type FlexStyledProps = {
   justifyContent?: "flex-start" | "flex-end" | "start" | "end" | "left" | "right" | "center" | "space-between" | "space-around" | "space-evenly";
   flexDirection?: "row" | "row-reverse" | "column" | "column-reverse" | "initial" | "inherit";
   alignContent?: "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly" | "stretch" | "start" | "end" | "baseline" | "first baseline" | "last baseline";
-  rowGap?: string /* Exemplo => "10px" */ | "normal" | "initial" | "inherit"; 
+  rowGap?: string /* Exemplo => "10px" */ | "normal" | "initial" | "inherit";
   columnGap?: string /* Exemplo => "10px" */ | "normal" | "initial" | "inherit";
   order?: number | "initial" | "inherit";
   alignSelf?: "auto" | "stretch" | "center" | "flex-start" | "flex-end" | "baseline" | "initial" | "inherit";
@@ -20,13 +21,11 @@ type FlexStyledProps = {
   flexGrow?: number | "initial" | "inherit";
   flexShrink?: number | "initial" | "inherit";
   flexBasis?: number | "auto" | "initial" | "inherit";
-};
+} & DimensionStyledTypes & PaddingStyledTypes & MarginStyledTypes;
 
-type FlexProps = HTMLAttributes<HTMLDivElement> & FlexStyledProps
+type FlexProps = HTMLAttributes<HTMLDivElement> & FlexStyledProps;
 
 const FlexStyled = styled.div<FlexStyledProps>`
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: ${(props) => props.alignItems || "stretch"};
   justify-content: ${(props) => props.justifyContent || "flex-start"};
@@ -40,4 +39,7 @@ const FlexStyled = styled.div<FlexStyledProps>`
   flex-grow: ${(props) => props.flexGrow || 0};
   flex-shrink: ${(props) => props.flexShrink || 1};
   flex-basis: ${(props) => props.flexBasis || "auto"};
+  ${DimensionStyledCss}
+  ${PaddingStyledCss}
+  ${MarginStyledCss}
 `;
